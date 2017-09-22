@@ -1,0 +1,957 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nlp,word2vec," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hardboiled Wonderland" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="简介这篇文章是 Word2Vec 作者关于 Mikolov 的 Skip-gram 模型提出的改进和扩展，主要是提升训练速度和词向量的质量。 关于 Skip-gramSkip-gram 能够高效地从大量文本中训练出词向量。与其他神经网络架构模型不同的是，它不涉及矩阵乘法，大大提升了训练效率。经过学习后的词向量甚至能够进行线性运算。比如： vec(“Madrid”) - vec(“Spain”) +">
+<meta name="keywords" content="nlp,word2vec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读: Distributed Representation of Words and Phrases and their Compositionality">
+<meta property="og:url" content="http://gnostikoi.github.io/2016/06/23/drwpc/index.html">
+<meta property="og:site_name" content="Hardboiled Wonderland">
+<meta property="og:description" content="简介这篇文章是 Word2Vec 作者关于 Mikolov 的 Skip-gram 模型提出的改进和扩展，主要是提升训练速度和词向量的质量。 关于 Skip-gramSkip-gram 能够高效地从大量文本中训练出词向量。与其他神经网络架构模型不同的是，它不涉及矩阵乘法，大大提升了训练效率。经过学习后的词向量甚至能够进行线性运算。比如： vec(“Madrid”) - vec(“Spain”) +">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://gnostikoi.github.io/uploads/skipgram.png">
+<meta property="og:updated_time" content="2017-09-22T01:15:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文阅读: Distributed Representation of Words and Phrases and their Compositionality">
+<meta name="twitter:description" content="简介这篇文章是 Word2Vec 作者关于 Mikolov 的 Skip-gram 模型提出的改进和扩展，主要是提升训练速度和词向量的质量。 关于 Skip-gramSkip-gram 能够高效地从大量文本中训练出词向量。与其他神经网络架构模型不同的是，它不涉及矩阵乘法，大大提升了训练效率。经过学习后的词向量甚至能够进行线性运算。比如： vec(“Madrid”) - vec(“Spain”) +">
+<meta name="twitter:image" content="http://gnostikoi.github.io/uploads/skipgram.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://gnostikoi.github.io/2016/06/23/drwpc/"/>
+
+
+
+
+
+  <title> 论文阅读: Distributed Representation of Words and Phrases and their Compositionality | Hardboiled Wonderland </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hardboiled Wonderland</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://gnostikoi.github.io/2016/06/23/drwpc/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Luna Chiang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hardboiled Wonderland">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hardboiled Wonderland" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                论文阅读: Distributed Representation of Words and Phrases and their Compositionality
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-23T14:41:10+08:00">
+                2016-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/06/23/drwpc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/23/drwpc/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>这篇文章是 <a href="https://zh.wikipedia.org/zh/Word2vec" target="_blank" rel="external">Word2Vec</a> 作者关于 <a href="https://scholar.google.com/citations?user=oBu8kMMAAAAJ&amp;hl=zh-CN" target="_blank" rel="external">Mikolov</a> 的 Skip-gram 模型提出的改进和扩展，主要是提升训练速度和词向量的质量。</p>
+<h3 id="关于-Skip-gram"><a href="#关于-Skip-gram" class="headerlink" title="关于 Skip-gram"></a>关于 Skip-gram</h3><p>Skip-gram 能够高效地从大量文本中训练出词向量。与其他神经网络架构模型不同的是，它不涉及矩阵乘法，大大提升了训练效率。经过学习后的词向量甚至能够进行线性运算。比如： vec(“Madrid”) - vec(“Spain”) + vec(“France”) is closer to vec(“Paris”)</p>
+<p><img src="/uploads/skipgram.png" alt="skipgram"><span class="my-image-caption">skipgram</span></p>
+<p>Skip-gram 的训练目标是能够预测文本中某个词周围可能出现的词。比如，现在有一份文档（去掉标点符号）由 $T$ 个词组成，$w_1,w_2,w_3,…,w_T$， skip-gram 的目标函数就是最大化它们的平均对数概率</p>
+<p>$$ \frac{1}{T} \sum_{t=1}^{T} \sum_{-c \leq j \leq c} \log p(w_{t+j} | w_t) $$</p>
+<p>c 是上下文长度，也就是中心词 $w_t$ 的前后各 c 个词， c 越大意味着训练样本越多，精度也就越高，但时间开销大。以 softmax 的方式计算 $p(w_O|w_I)$</p>
+<p>$$ p(w_O|w_I) = \frac{\exp({v’_{w_O}}^\top v_{w_I})}{\sum_{w=1}^{W} \exp({v’_{w}}^\top v\_{w_I})} $$</p>
+<p>$W$ 是总词汇量，$v_w$ 和 $v’_w$ 是词 $w$ 的输入和输出变量。然而这个公式是不现实的，因为计算开销随着总词汇量 $W$ 而增长。</p>
+<h3 id="基于-Skip-gram-的扩展"><a href="#基于-Skip-gram-的扩展" class="headerlink" title="基于 Skip-gram 的扩展"></a>基于 Skip-gram 的扩展</h3><h4 id="Hierarchical-Softmax"><a href="#Hierarchical-Softmax" class="headerlink" title="Hierarchical Softmax"></a>Hierarchical Softmax</h4><p>skip-gram 中需要 $W$ 个输出节点来计算概率分布，而 Hierarchical Softmax 只需要大约 $\log_2(W)$ 个输出节点，因为它的输出层采用了二叉树的表现形式。每个节点是一个词，它的子节点存储是与这个词相关的词。节点中只存储该词与子节点词的相对概率。总词汇中的每个词都有一条从二叉树根部到自身的路径。用 $n(w,j)$ 来表示从根节点到 w 词这条路径上的第 j 个节点。用 $ch(n)$ 来表示 $n$ 的任意一个子节点。</p>
+<p>那么 Hierarchical Softmax 可以表示为</p>
+<p>$$ p(w | w_I) = \prod_{j=1}^{L(w)-1} \sigma ([[ n(w,j+1) = ch(n(w,j))]]\cdot {v’_{n(w,j)}}^\top v_{w_I}) $$</p>
+<p>$$ s.t. \sigma (x)= \frac{1}{1+\exp(-x)} $$</p>
+<p>$ \sum_{w=1}^{W}p(w|w_I) = 1 $ 是可以验证的，这样一来 $ \log p(w_O|w_I)$ 和 $\nabla \log p(w_O|w_I)$ 的计算开销就和 $L(W_O)$ 成比例。而 $L(W_O)$ 不会超过 $\log W$. Word2Vec 中使用的是哈夫曼二叉树，高频词汇编码较短，低频词汇编码较长。</p>
+<h4 id="Negative-Sampling"><a href="#Negative-Sampling" class="headerlink" title="Negative Sampling"></a>Negative Sampling</h4><p>NCE(Noise Contrastive Estimation):好的模型能够通过逻辑斯蒂回归将数据从噪声中区别出来</p>
+<p>因为 skip-gram 更关注于学习高质量的词向量表达，所以可以在保证词向量质量的前提下对 NCE 进行简化。于是定义了 NEG(Negative Sampling)</p>
+<p>$$ \log \sigma({v’_{w_O}}^\top v_{w_I} )+ \sum_{i=1}^{k}\mathbb{E}_{w_i \sim P_n(w)}[\log \sigma(-{v’_{w_i}}^\top v_{w_I})] $$</p>
+<p>这个公式用来替代 skip-gram 目标函数中的 $\log p(w_O|w_I)$. $ P_n(w)$ 是词 $n$ 周围的噪声词分布（NCE 和 NEG 都有这个参数）。这个公式是用逻辑斯蒂回归从 $k$ 个负例中区别出目标词汇。对于小的训练集 $k$ 的最佳取值是 5-20， 对于大的训练集 $k$ 的取值会更小，大概 2-5. NCE 和 NEG 的区别在于 NCE 在计算时需要样本和噪音分布的数值概率，而 NEG 只需要样本。</p>
+<h4 id="Subsampling"><a href="#Subsampling" class="headerlink" title="Subsampling"></a>Subsampling</h4><p>subsampling 用于解决这样的问题：在英文中有大量高频词诸如 “in”, “the”, “a”, 这些词提供的信息量非常少。比如 “Paris” 和 “France” 的共现率明显比 “France” 和 “The” 的共现率低，但 “Paris” 和 “France” 明显更有用。</p>
+<p>为了解决高频和低频词汇间的不平衡，每个词汇的频率有一定概率被丢弃，概率由公式得出：</p>
+<p>$$ P(w_i) = 1 - \sqrt{\frac{t}{f(w_i)}}$$</p>
+<p>$ f(w_i)$ 是词 $w_i$ 的概率. $t$ 是参数，作为淘汰词的门限，通常情况下约为 $10^{-5}$. 当词汇的频率高于 $t$ 就有一定概率被淘汰掉。</p>
+<h3 id="处理-Phrase"><a href="#处理-Phrase" class="headerlink" title="处理 Phrase"></a>处理 Phrase</h3><p>这部分主要解决专有名词的问题，比如期刊杂志的名字 “New York Times” 并不是单词 “New York” 和 “Times” 词义的简单组合，所以要把它们当成一个词组来看待。作者用了一种简单的数据驱动方式来识别这些专有名词。对于两个词 $w_i, w_j$：</p>
+<p>$$ score(w_i, w_j) = \frac{count(w_i w_j) - \delta}{count(w_i) \times count(w_j)}$$</p>
+<p>其中 $\delta$ 是协同系数，用来避免太多无关的词被组合到一起。</p>
+<h3 id="资源下载"><a href="#资源下载" class="headerlink" title="资源下载"></a>资源下载</h3><p><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0ahUKEwjf3prT0b3NAhVI4mMKHVQCCwAQFggeMAA&amp;url=https%3A%2F%2Fpapers.nips.cc%2Fpaper%2F5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf&amp;usg=AFQjCNFvn2t3S41dxIocYbx5EpeOwmjXVQ&amp;sig2=4bbJwW1O7AnHYZfFbA2pIQ" target="_blank" rel="external">Distributed Representation of Words and Phrases and their Compositionality</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"># nlp</a>
+          
+            <a href="/tags/word2vec/" rel="tag"># word2vec</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/27/rnn/" rel="prev" title="Introduction to RNNs">
+                Introduction to RNNs <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpeg"
+               alt="Luna Chiang" />
+          <p class="site-author-name" itemprop="name">Luna Chiang</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Gnostikoi" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gnoluna" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.instagram.com/gnoluna/" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于-Skip-gram"><span class="nav-number">2.</span> <span class="nav-text">关于 Skip-gram</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于-Skip-gram-的扩展"><span class="nav-number">3.</span> <span class="nav-text">基于 Skip-gram 的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hierarchical-Softmax"><span class="nav-number">3.1.</span> <span class="nav-text">Hierarchical Softmax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Negative-Sampling"><span class="nav-number">3.2.</span> <span class="nav-text">Negative Sampling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subsampling"><span class="nav-number">3.3.</span> <span class="nav-text">Subsampling</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理-Phrase"><span class="nav-number">4.</span> <span class="nav-text">处理 Phrase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源下载"><span class="nav-number">5.</span> <span class="nav-text">资源下载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luna Chiang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hardboiled-wonderland';
+      var disqus_identifier = '2016/06/23/drwpc/';
+
+      var disqus_title = "论文阅读: Distributed Representation of Words and Phrases and their Compositionality";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
