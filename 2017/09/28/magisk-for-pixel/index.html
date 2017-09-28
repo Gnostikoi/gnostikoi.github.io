@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Deep Leaning,RNN," />
+  <meta name="keywords" content="Android,Magisk,Pixel," />
 
 
 
@@ -86,21 +86,20 @@
 
 
 
-<meta name="description" content="Abstract | 简介Language Model | 语言模型语言模型主要解决两件事  能够对计算机生成的句子进行打分，分数高低取决于这个句子有多大概率在现实中出现。分数作为一种语法和语义上的度量 能够产生新的句子。比如用莎士比亚作品作为语料库，可以产生莎士比亚文风的句子。  Recurrent Nerual Network | 循环神经网络关于统计语言模型， Bengio 曾提出过一个使用">
-<meta name="keywords" content="Deep Leaning,RNN">
+<meta name="description" content="自从有了折腾手机的念头，我就从未放弃过给自己的 Pixel sailfish 装上 Magisk。毕竟 Xposed 的作者已经以一副要弃坑的姿势搁置这个目前仍相对主流的框架，为了能在抵达欧陆之后玩上小畜生以及其他定制需求, Magisk 成了最吸引人的 systemless root 解决方案。然而 Pixel 的 A/B partition 造成了各种不兼容。众 Pixel(XL) 用户只能依">
+<meta name="keywords" content="Android,Magisk,Pixel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Introduction to RNNs">
-<meta property="og:url" content="http://gnostikoi.github.io/2016/06/27/rnn/index.html">
+<meta property="og:title" content="千辛万苦等来了 Magisk 对 Pixel(XL) 的官方支持">
+<meta property="og:url" content="http://gnostikoi.github.io/2017/09/28/magisk-for-pixel/index.html">
 <meta property="og:site_name" content="Hardboiled Wonderland">
-<meta property="og:description" content="Abstract | 简介Language Model | 语言模型语言模型主要解决两件事  能够对计算机生成的句子进行打分，分数高低取决于这个句子有多大概率在现实中出现。分数作为一种语法和语义上的度量 能够产生新的句子。比如用莎士比亚作品作为语料库，可以产生莎士比亚文风的句子。  Recurrent Nerual Network | 循环神经网络关于统计语言模型， Bengio 曾提出过一个使用">
+<meta property="og:description" content="自从有了折腾手机的念头，我就从未放弃过给自己的 Pixel sailfish 装上 Magisk。毕竟 Xposed 的作者已经以一副要弃坑的姿势搁置这个目前仍相对主流的框架，为了能在抵达欧陆之后玩上小畜生以及其他定制需求, Magisk 成了最吸引人的 systemless root 解决方案。然而 Pixel 的 A/B partition 造成了各种不兼容。众 Pixel(XL) 用户只能依">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://gnostikoi.github.io/uploads/recurrence_gif.gif">
-<meta property="og:image" content="http://gnostikoi.github.io/uploads/backprop_through_time.gif">
-<meta property="og:updated_time" content="2017-09-22T01:15:05.000Z">
+<meta property="og:image" content="http://gnostikoi.github.io/uploads/magisk_screenshot.png">
+<meta property="og:updated_time" content="2017-09-28T12:50:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Introduction to RNNs">
-<meta name="twitter:description" content="Abstract | 简介Language Model | 语言模型语言模型主要解决两件事  能够对计算机生成的句子进行打分，分数高低取决于这个句子有多大概率在现实中出现。分数作为一种语法和语义上的度量 能够产生新的句子。比如用莎士比亚作品作为语料库，可以产生莎士比亚文风的句子。  Recurrent Nerual Network | 循环神经网络关于统计语言模型， Bengio 曾提出过一个使用">
-<meta name="twitter:image" content="http://gnostikoi.github.io/uploads/recurrence_gif.gif">
+<meta name="twitter:title" content="千辛万苦等来了 Magisk 对 Pixel(XL) 的官方支持">
+<meta name="twitter:description" content="自从有了折腾手机的念头，我就从未放弃过给自己的 Pixel sailfish 装上 Magisk。毕竟 Xposed 的作者已经以一副要弃坑的姿势搁置这个目前仍相对主流的框架，为了能在抵达欧陆之后玩上小畜生以及其他定制需求, Magisk 成了最吸引人的 systemless root 解决方案。然而 Pixel 的 A/B partition 造成了各种不兼容。众 Pixel(XL) 用户只能依">
+<meta name="twitter:image" content="http://gnostikoi.github.io/uploads/magisk_screenshot.png">
 
 
 
@@ -128,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://gnostikoi.github.io/2016/06/27/rnn/"/>
+  <link rel="canonical" href="http://gnostikoi.github.io/2017/09/28/magisk-for-pixel/"/>
 
 
 
 
 
-  <title> Introduction to RNNs | Hardboiled Wonderland </title>
+  <title> 千辛万苦等来了 Magisk 对 Pixel(XL) 的官方支持 | Hardboiled Wonderland </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -290,7 +289,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://gnostikoi.github.io/2016/06/27/rnn/">
+  <link itemprop="mainEntityOfPage" href="http://gnostikoi.github.io/2017/09/28/magisk-for-pixel/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Luna Chiang">
@@ -314,7 +313,7 @@
             
             
               
-                Introduction to RNNs
+                千辛万苦等来了 Magisk 对 Pixel(XL) 的官方支持
               
             
           </h1>
@@ -329,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-27T15:02:57+08:00">
-                2016-06-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-28T17:13:40+08:00">
+                2017-09-28
               </time>
             
 
@@ -340,28 +339,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -370,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/06/27/rnn/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/27/rnn/" itemprop="commentCount"></span>
+                <a href="/2017/09/28/magisk-for-pixel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/09/28/magisk-for-pixel/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,66 +374,38 @@
       
 
       
-        <h3 id="Abstract-简介"><a href="#Abstract-简介" class="headerlink" title="Abstract | 简介"></a>Abstract | 简介</h3><h4 id="Language-Model-语言模型"><a href="#Language-Model-语言模型" class="headerlink" title="Language Model | 语言模型"></a>Language Model | 语言模型</h4><p>语言模型主要解决两件事</p>
-<ul>
-<li>能够对计算机生成的句子进行打分，分数高低取决于这个句子有多大概率在现实中出现。分数作为一种语法和语义上的度量</li>
-<li>能够产生新的句子。比如用莎士比亚作品作为语料库，可以产生莎士比亚文风的句子。</li>
+        <p>自从有了折腾手机的念头，我就从未放弃过给自己的 Pixel sailfish 装上 <a href="https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445" target="_blank" rel="external">Magisk</a>。毕竟 Xposed 的作者已经以一副要弃坑的姿势搁置这个目前仍相对主流的框架，为了能在抵达欧陆之后玩上<strong>小畜生</strong>以及其他定制需求, Magisk 成了最吸引人的 systemless root 解决方案。然而 Pixel 的 A/B partition 造成了各种不兼容。众 Pixel(XL) 用户只能依赖<a href="https://forum.xda-developers.com/apps/magisk/unofficial-google-pixel-family-support-t3639262" target="_blank" rel="external">非官方支持</a> (此处感谢 goodwin_c)。这在 Android 8.0 之前还都不是事，Oreo 一出我们就只能巴望着 topjohnwu 的更新（为此我还设置了 twitter 提醒 orz）。</p>
+<p>好在 topjohnwu 是个勤劳的开发者，度假回来马上更新了 <a href="https://forum.xda-developers.com/apps/magisk/beta-magisk-v13-0-0980cb6-t3618589" target="_blank" rel="external">v14.1</a>，感恩。</p>
+<p>目前为止在我的 Pixel sailfish Android 8.0 上没有问题，安装过程中也没出什么幺蛾子。在此记录下安装过程。</p>
+<p><strong>DISCLAIMER: 虽然几乎不可能刷砖，但还是得说一句 Do at your own risk.</strong></p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><ul>
+<li>下载 <a href="https://forum.xda-developers.com/attachment.php?s=b12bee961638472dc0099d6e042e0cb4&amp;attachmentid=4285325&amp;d=1506549792" target="_blank" rel="external">Magisk v14.1</a></li>
+<li>下载 <a href="https://dl.twrp.me/sailfish/twrp-3.1.1-0-fastboot-sailfish.img.html" target="_blank" rel="external">twrp-3.1.1-0-fastboot-sailfish.img</a> (已经刷过 TWRP recovery 的可以忽略这项)。然后重命名为 twrp.img，出于方便键入的考虑。</li>
+<li>下载 <a href="https://github.com/topjohnwu/MagiskManager/releases/download/v5.3.5/MagiskManager-v5.3.5.apk" target="_blank" rel="external">Magisk Manager v5.3.5</a></li>
+<li>电脑上安装 android-platform-tools (会用到 adb 和 fastboot)</li>
+<li>手机已解锁 OEM</li>
+<li>手机上设置开启 PIN 或者 Pattern 密码（要不然进入 recovery 之后文件夹会被加密完全找不到想要的文件）</li>
 </ul>
-<h4 id="Recurrent-Nerual-Network-循环神经网络"><a href="#Recurrent-Nerual-Network-循环神经网络" class="headerlink" title="Recurrent Nerual Network | 循环神经网络"></a>Recurrent Nerual Network | 循环神经网络</h4><p>关于统计语言模型， Bengio 曾提出过一个使用定长文本训练的前馈神经网络。但这个模型的主要问题是前馈网络依赖于一个预设的文本长度，不能针对不同语境作出动态变化。循环神经网络针对这点作出改进：RNN 不限制文本的长度，而且文本信息能够在网络中循环任意时间。</p>
-<p>RNN 的主要思想是充分利用序列化信息之间时间上的关联。传统神经网络将所有输入信息作为相互独立的信息来看待，但在很多情况下（尤其是自然语言处理的问题上）并不是个好的想法。因为语境信息对于语言模型是至关重要的，一个词在某个位置出现的概率很大程度上受前文中其他词的影响。RNN 之所以叫循环神经网络是因为它对序列中每个词的处理是基于前面词的状态。可以理解为 RNN 是一个带有记忆的模型，它能够缓存之前的运算结果，这些状态结果会一直影响接下来的神经元运算。理论上 RNN 能够充分利用任意长度序列的信息，但出于对效率因素的考虑只回看若干步。</p>
-<p><a href="https://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/" target="_blank" rel="external">trask 博客</a>中的这个 gif 图片能够很直观得看出 RNN 的运行过程。</p>
-<p><img src="/uploads/recurrence_gif.gif" alt="RNN_GIF"><span class="my-image-caption">RNN_GIF</span></p>
-<p>图中展示了 4 个时间步 (timestep) 中隐层 (hidden layer) 的变化。第一个时间步中隐层的计算完全依赖于输入；第二个时间步中隐层的输入来源于第一个隐层的输出和第二个时间步的输入。到了第四个时间步，隐层已经包含了所有输入信息。到第五个时间步，隐层就要决定哪些信息要留下，哪些信息要被覆盖。因此隐层节点越多就能记住更长的时间段内的信息，隐层节点数量意味着循环神经网络的记忆容量。</p>
-<p>这样的架构中，输入不仅仅是单纯的输入，输入信息不停地更新 RNN 的 “memory”， 输出是基于某个状态下的 “memory”. 即便某个时间步内没有任何输入, memory 也会随着时间动态发生变化。</p>
-<p>先通过一个最基础的 RNN 了解一下它的架构。 Simple recurrent neural network (or Elman Network）</p>
-<table>
-<thead>
-<tr>
-<th>符号表示</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$x(t)$</td>
-<td>t 时间步的输入信息</td>
-</tr>
-<tr>
-<td>$y(t)$</td>
-<td>t 时间步的输出信息</td>
-</tr>
-<tr>
-<td>$s(t)$</td>
-<td>t 时间步的隐层（神经网络的状态）</td>
-</tr>
-<tr>
-<td>$U$</td>
-<td>隐层和隐层之间的传导矩阵 synapse_h</td>
-</tr>
-<tr>
-<td>$V$</td>
-<td>隐层和输出层之间的传导矩阵 synapse_1</td>
-</tr>
-<tr>
-<td>$f(z)$</td>
-<td>sigmoid 激活函数</td>
-</tr>
-<tr>
-<td>$g(z_m)$</td>
-<td>softmax 函数</td>
-</tr>
-</tbody>
-</table>
-<p>$$ x(t) = w(t) + s(t-1) $$</p>
-<p>$$ s_j(t) = f\left(\sum_i x_i(t)u_ij \right)$$</p>
-<p>$$ y_k(t) = g\left(\sum_j s_j(t)v_kj \right)$$</p>
-<p>$$ s.t. f(z) = \frac{1}{1+e^{-z}} , g(z_m) = \frac{e^{z_m}}{\sum_{k}e^{z_k}}$$</p>
-<p>$s(0)$ 被初始化为值很小的向量，比如 0.1 。处理大量数据时初始化不是关键因素。隐层节点数量大约在 30-500 之间，反应了训练数据的数量。</p>
-<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><p>神经网络大约要经过 10-20 个 epoch 才能达到比较好的收敛效果。BP 算法和 SGD(Stochastic Gradient Descent) 是比较常见的训练方法。设置 learning rate 为 0.1, 每完成一个 epoch 就要在验证集上进行测试，通过观察验证集的对数似然来判断模型是否收敛。如果模型没有显著提高，就将 learning rate 减半，接着进行下一个 epoch .</p>
-<h4 id="Backpropagation-Through-Time-BPTT"><a href="#Backpropagation-Through-Time-BPTT" class="headerlink" title="Backpropagation Through Time (BPTT)"></a>Backpropagation Through Time (BPTT)</h4><p>gif 动态图来自<a href="https://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/" target="_blank" rel="external">trask 博客</a></p>
-<p><img src="/uploads/backprop_through_time.gif" alt="bptt"><span class="my-image-caption">bptt</span></p>
-<p>BPTT 是 BP 算法针对循环神经网络的一个改进版本。BPTT 的参数被所有时间步共享。每个输出的梯度依赖于之前的时间步，其实就是对应微积分中的链式法则。例如为了计算 $t = 4$ 时的梯度，需要反向传播 3 次更新权重。BPTT 算法仍有不能解决的问题，比如词汇间的长期依赖(long-term dependency). 两个词隔得很远，但它们之间确有联系。在时间步到达第二个词的时候，第一个词已经被遗忘了。这就是所谓的梯度消失/梯度爆炸 (vanishing/exploding gradient) 问题。针对这个问题已经有了好的解决方法，如 <a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>.  LSTM 的架构原则上和一般 RNN 没有什么不同，但在隐层的计算上用了一些技巧，能够选择哪些重要的信息值得记忆。对于捕获词汇间的长期依赖有很大的贡献。</p>
-<h3 id="Reference-参考资料"><a href="#Reference-参考资料" class="headerlink" title="Reference | 参考资料"></a>Reference | 参考资料</h3><p><a href="http://www.fit.vutbr.cz/research/groups/speech/publi/2010/mikolov_interspeech2010_IS100722.pdf" target="_blank" rel="external">Mikolov: Recurrent neural network based language model</a><br><a href="http://www.fit.vutbr.cz/research/groups/speech/publi/2011/mikolov_icassp2011_presentation_rnnlm-extension.pdf" target="_blank" rel="external">Mikolov: Extensions of recurrent neural network language model</a><br><a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/" target="_blank" rel="external">WildML:Recurrent Neural Networks Tutorial, Part 1 – Introduction to RNNs</a><br><a href="https://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/" target="_blank" rel="external">trask: Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN)</a></p>
+<p><strong>特别提示</strong> 如果你之前折腾过，要刷回 Pixel 的原厂 boot.img 或者刷入 <a href="https://forum.xda-developers.com/attachment.php?attachmentid=4285327&amp;d=1506549946" target="_blank" rel="external">Magisk Uninstaller</a></p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><ol>
+<li>手机链接电脑，将 <strong>Magisk-v14.1(1410).zip</strong> 和 <strong>MagiskManager-v5.3.5.apk</strong> 放入存储中</li>
+<li>开启 usb 调试</li>
+<li><code>adb devices</code> 确认手机被识别到</li>
+<li><code>adb reboot bootloader</code> 或者关机长按<strong>电源+音量-</strong>进入 bootloader 模式。</li>
+<li><code>fastboot devices</code> 确认手机被识别到</li>
+<li><code>fastboot boot /path/to/twrp.img</code> </li>
+<li>输入密码进入 twrp recovery，选择 install，找到并选中 <strong>Magisk-v14.1(1410).zip</strong>，swipe 刷入。完成后重启</li>
+<li>重启后安装 <strong>MagiskManager-v5.3.5.apk</strong></li>
+<li>看到此界面说明您已经安装成功</li>
+</ol>
+<p><img src="/uploads/magisk_screenshot.png" alt=""></p>
+<h3 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h3><p>新版本发布前一周 Magisk 作者 topjohnwu 就<a href="https://twitter.com/topjohnwu/status/908542227143471104" target="_blank" rel="external">在 Twitter 上</a>说针对 Pixel A/B 分区会有新特性。那就是，Magisk 和 OTA 更新兼得。无法 OTA 更新可以说是 root 之后最不方便的一件事，现在解决了。</p>
+<blockquote>
+<p>   Pixel Exclusive Features<br>Surprise surprise! Thanks to the A/B partition of Pixel devices, we can actually receive and apply OTAs seamlessly using the stock OTA mechanism and preserve Magisk at the same time! </p>
+</blockquote>
+<p>简单说就是在安装 Magisk 的时候它已经备份了原厂 boot 镜像。在需要 OTA 更新时还原到原厂 boot 接收更新。安装完成后再将 Magisk 装回去 <em>Install to Second Slot(After OTA)</em>。重启之后 Magisk 不会被卸载，因为在启动时 Magisk 已经自动给新版本的 boot 打上补丁。</p>
+<p>作者也在文档中添加了 OTA 更新相关的<a href="https://github.com/topjohnwu/Magisk/blob/master/docs/tips.md#ota-installation-tips" target="_blank" rel="external">指南</a>。亲妈一样的人文关怀。</p>
+<p>Magisk 是好东西哎~</p>
 
       
     </div>
@@ -480,9 +429,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Deep-Leaning/" rel="tag"># Deep Leaning</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/RNN/" rel="tag"># RNN</a>
+            <a href="/tags/Magisk/" rel="tag"># Magisk</a>
+          
+            <a href="/tags/Pixel/" rel="tag"># Pixel</a>
           
         </div>
       
@@ -491,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/23/drwpc/" rel="next" title="论文阅读: Distributed Representation of Words and Phrases and their Compositionality">
-                <i class="fa fa-chevron-left"></i> 论文阅读: Distributed Representation of Words and Phrases and their Compositionality
+              <a href="/2017/09/22/rosseta-stone-jigsaw-puzzel/" rel="next" title="拼图 in Lunatic Mode">
+                <i class="fa fa-chevron-left"></i> 拼图 in Lunatic Mode
               </a>
             
           </div>
@@ -500,10 +451,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/03/lstm/" rel="prev" title="论文阅读: Long Short-Term Memory Based Recurrent Neural Network Architectures for Large Vocabulary Speech Recognition">
-                论文阅读: Long Short-Term Memory Based Recurrent Neural Network Architectures for Large Vocabulary Speech Recognition <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -675,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-简介"><span class="nav-number">1.</span> <span class="nav-text">Abstract | 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Language-Model-语言模型"><span class="nav-number">1.1.</span> <span class="nav-text">Language Model | 语言模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recurrent-Nerual-Network-循环神经网络"><span class="nav-number">1.2.</span> <span class="nav-text">Recurrent Nerual Network | 循环神经网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">2.</span> <span class="nav-text">Training</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Backpropagation-Through-Time-BPTT"><span class="nav-number">2.1.</span> <span class="nav-text">Backpropagation Through Time (BPTT)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference-参考资料"><span class="nav-number">3.</span> <span class="nav-text">Reference | 参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装过程"><span class="nav-number">2.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新特性"><span class="nav-number">3.</span> <span class="nav-text">新特性</span></a></li></ol></div>
             
 
           </div>
@@ -800,9 +747,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'hardboiled-wonderland';
-      var disqus_identifier = '2016/06/27/rnn/';
+      var disqus_identifier = '2017/09/28/magisk-for-pixel/';
 
-      var disqus_title = "Introduction to RNNs";
+      var disqus_title = "千辛万苦等来了 Magisk 对 Pixel(XL) 的官方支持";
 
 
       function run_disqus_script(disqus_script) {
