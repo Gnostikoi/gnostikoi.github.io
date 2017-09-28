@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://gnostikoi.github.io/2017/09/28/magisk-for-pixel/</loc>
+    <lastmod>2017-09-28T13:31:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>千辛万苦等来了 Magisk 对 Pixel(XL) 的官方支持</title>
+        <pubTime>2017-09-28T09:13:40.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Magisk</tag>
+         
+        <tag>Pixel</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://gnostikoi.github.io/2017/09/22/rosseta-stone-jigsaw-puzzel/</loc>
+    <lastmod>2017-09-22T05:22:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>拼图 in Lunatic Mode</title>
+        <pubTime>2017-09-22T02:35:46.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="life" url="http://gnostikoi.github.io/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://gnostikoi.github.io/2016/06/27/rnn/</loc>
+    <lastmod>2017-09-22T01:15:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>Introduction to RNNs</title>
+        <pubTime>2016-06-27T07:02:57.000Z</pubTime>
+        
+        <tag>Deep Leaning</tag>
+         
+        <tag>RNN</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://gnostikoi.github.io/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://gnostikoi.github.io/2016/06/23/drwpc/</loc>
+    <lastmod>2017-09-22T01:15:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>论文阅读: Distributed Representation of Words and Phrases and their Compositionality</title>
+        <pubTime>2016-06-23T06:41:10.000Z</pubTime>
+        
+        <tag>nlp</tag>
+         
+        <tag>word2vec</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://gnostikoi.github.io/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://gnostikoi.github.io/2017/07/08/historyin100objects/</loc>
+    <lastmod>2017-09-22T01:15:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>参观完了上博「大英百物」展</title>
+        <pubTime>2017-07-08T01:15:46.000Z</pubTime>
+        
+        <tag>museum</tag>
+         
+         
+           
+             
+              <breadCrumb title="life" url="http://gnostikoi.github.io/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://gnostikoi.github.io/2016/07/03/lstm/</loc>
+    <lastmod>2017-09-22T01:15:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>论文阅读: Long Short-Term Memory Based Recurrent Neural Network Architectures for Large Vocabulary Speech Recognition</title>
+        <pubTime>2016-07-03T07:15:53.000Z</pubTime>
+        
+        <tag>lstm</tag>
+         
+        <tag>Deep Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://gnostikoi.github.io/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+</urlset>
