@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://gnostikoi.github.io/2018/04/02/bujo-blog/</loc>
+    <lastmod>2018-04-02T21:21:39.103Z</lastmod>
+    <data>
+        <display>
+        <title>Luna 的 Bullet Journal 里有些啥</title>
+        <pubTime>2018-04-02T12:35:53.000Z</pubTime>
+        
+        <tag>BUJO</tag>
+         
+         
+           
+             
+              <breadCrumb title="life" url="http://gnostikoi.github.io/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://gnostikoi.github.io/2017/09/28/magisk-for-pixel/</loc>
     <lastmod>2017-09-28T13:31:00.000Z</lastmod>
     <data>
@@ -43,16 +63,16 @@
 
     
   <url>
-    <loc>http://gnostikoi.github.io/2016/06/27/rnn/</loc>
+    <loc>http://gnostikoi.github.io/2016/06/23/drwpc/</loc>
     <lastmod>2017-09-22T01:15:05.000Z</lastmod>
     <data>
         <display>
-        <title>Introduction to RNNs</title>
-        <pubTime>2016-06-27T07:02:57.000Z</pubTime>
+        <title>论文阅读: Distributed Representation of Words and Phrases and their Compositionality</title>
+        <pubTime>2016-06-23T06:41:10.000Z</pubTime>
         
-        <tag>Deep Leaning</tag>
+        <tag>nlp</tag>
          
-        <tag>RNN</tag>
+        <tag>word2vec</tag>
          
          
            
@@ -65,16 +85,16 @@
 
     
   <url>
-    <loc>http://gnostikoi.github.io/2016/06/23/drwpc/</loc>
+    <loc>http://gnostikoi.github.io/2016/07/03/lstm/</loc>
     <lastmod>2017-09-22T01:15:05.000Z</lastmod>
     <data>
         <display>
-        <title>论文阅读: Distributed Representation of Words and Phrases and their Compositionality</title>
-        <pubTime>2016-06-23T06:41:10.000Z</pubTime>
+        <title>论文阅读: Long Short-Term Memory Based Recurrent Neural Network Architectures for Large Vocabulary Speech Recognition</title>
+        <pubTime>2016-07-03T07:15:53.000Z</pubTime>
         
-        <tag>nlp</tag>
+        <tag>lstm</tag>
          
-        <tag>word2vec</tag>
+        <tag>Deep Learning</tag>
          
          
            
@@ -107,16 +127,16 @@
 
     
   <url>
-    <loc>http://gnostikoi.github.io/2016/07/03/lstm/</loc>
+    <loc>http://gnostikoi.github.io/2016/06/27/rnn/</loc>
     <lastmod>2017-09-22T01:15:05.000Z</lastmod>
     <data>
         <display>
-        <title>论文阅读: Long Short-Term Memory Based Recurrent Neural Network Architectures for Large Vocabulary Speech Recognition</title>
-        <pubTime>2016-07-03T07:15:53.000Z</pubTime>
+        <title>Introduction to RNNs</title>
+        <pubTime>2016-06-27T07:02:57.000Z</pubTime>
         
-        <tag>lstm</tag>
+        <tag>Deep Leaning</tag>
          
-        <tag>Deep Learning</tag>
+        <tag>RNN</tag>
          
          
            
